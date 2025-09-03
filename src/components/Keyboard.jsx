@@ -8,9 +8,8 @@ export const Keyboard = () => {
     const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     const { currentWord } = useCurrentWordStore();
     const [guessedLetters, setGuessedLetters] = useState([]);
-    console.log(guessedLetters);
     
-    const handleUserKeyPress = (letter, index) => {
+    const handleUserKeyPress = (letter) => {
         setGuessedLetters(prevLetters => 
             prevLetters.includes(letter) ? 
                 prevLetters : [...prevLetters, letter]
