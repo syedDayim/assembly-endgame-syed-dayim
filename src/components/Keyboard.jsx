@@ -1,5 +1,8 @@
 import { useState } from 'react';
+
 import { useCurrentWordStore } from '../store/useCurrentWordStore';
+
+import { buttonColorResolver } from '../helper/helperFunctions';
 
 export const Keyboard = () => {
     const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -14,20 +17,12 @@ export const Keyboard = () => {
         )
     }
 
-    const buttonColorResolver = (isCorrect, isWrong) => {
-        if(isWrong){
-            return "bg-red-600 text-white"
-        }else if(isCorrect){
-            return "bg-green-600 text-white"
-        }else{
-            return "bg-[#FCBA29] text-black"
-        }
-    } 
+
     
     const keyboardElements = alphabet.split("").map((letter, index) => {
         const isCorrect = guessedLetters.includes(letter) && currentWord.toUpperCase().includes(letter);
         const isWrong = guessedLetters.includes(letter) && !currentWord.toUpperCase().includes(letter);
-           
+        
         return (
             <button key={ index } className={`w-[40px] h-[40px] ${buttonColorResolver(isCorrect, isWrong)} border-[1px] border-white font-bold p-1.5 rounded-[6px] cursor-pointer`}  onClick={() => handleUserKeyPress(letter)}>{ letter }</button>
         )
