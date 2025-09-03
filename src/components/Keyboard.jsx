@@ -1,25 +1,29 @@
 import { useState } from 'react';
+
 import { useCurrentWordStore } from '../store/useCurrentWordStore';
+
+import { buttonColorResolver } from '../helper/helperFunctions';
 
 export const Keyboard = () => {
     const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     const { currentWord } = useCurrentWordStore();
     const [guessedLetters, setGuessedLetters] = useState([]);
-    console.log(guessedLetters);
     
-    const handleUserKeyPress = (letter, index) => {
+    const handleUserKeyPress = (letter) => {
         setGuessedLetters(prevLetters => 
             prevLetters.includes(letter) ? 
                 prevLetters : [...prevLetters, letter]
         )
     }
+
+
     
     const keyboardElements = alphabet.split("").map((letter, index) => {
-        const isGuessed = guessedLetters.includes(letter)
-        const isCorrect = isGuessed && currentWord.includes(letter);
+        const isCorrect = guessedLetters.includes(letter) && currentWord.toUpperCase().includes(letter);
+        const isWrong = guessedLetters.includes(letter) && !currentWord.toUpperCase().includes(letter);
         
         return (
-            <button key={ index } className={`w-[40px] h-[40px] bg-[#FCBA29] border-white border-[1px] text-black font-bold p-1.5 rounded-[6px] cursor-pointer`}  onClick={() => handleUserKeyPress(letter, index)}>{ letter }</button>
+            <button key={ index } className={`w-[40px] h-[40px] ${buttonColorResolver(isCorrect, isWrong)} border-[1px] border-white font-bold p-1.5 rounded-[6px] cursor-pointer`}  onClick={() => handleUserKeyPress(letter)}>{ letter }</button>
         )
     })
     return (
