@@ -13,13 +13,23 @@ export const Keyboard = () => {
                 prevLetters : [...prevLetters, letter]
         )
     }
+
+    const buttonColorResolver = (isCorrect, isWrong) => {
+        if(isWrong){
+            return "bg-red-600 text-white"
+        }else if(isCorrect){
+            return "bg-green-600 text-white"
+        }else{
+            return "bg-[#FCBA29] text-black"
+        }
+    } 
     
     const keyboardElements = alphabet.split("").map((letter, index) => {
-        const isGuessed = guessedLetters.includes(letter)
-        const isCorrect = isGuessed && currentWord.includes(letter);
-        
+        const isCorrect = guessedLetters.includes(letter) && currentWord.toUpperCase().includes(letter);
+        const isWrong = guessedLetters.includes(letter) && !currentWord.toUpperCase().includes(letter);
+           
         return (
-            <button key={ index } className={`w-[40px] h-[40px] bg-[#FCBA29] border-white border-[1px] text-black font-bold p-1.5 rounded-[6px] cursor-pointer`}  onClick={() => handleUserKeyPress(letter, index)}>{ letter }</button>
+            <button key={ index } className={`w-[40px] h-[40px] ${buttonColorResolver(isCorrect, isWrong)} border-[1px] border-white font-bold p-1.5 rounded-[6px] cursor-pointer`}  onClick={() => handleUserKeyPress(letter)}>{ letter }</button>
         )
     })
     return (
