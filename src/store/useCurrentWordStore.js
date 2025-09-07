@@ -33,3 +33,8 @@ export const useNoOfGuesses = create((set) => ({
         noOfGuesses: languages.length
     }))
 }));
+export const useHasWon = create((set) => ({
+    hasWon: false,
+    playerWon: () => set({ hasWon: true }),
+    reset: () => set({ hasWon: false })
+}));
