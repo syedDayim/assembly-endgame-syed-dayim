@@ -35,5 +35,10 @@
   "engines": {
     "node": ">=18.0.0",
     "npm": ">=8.0.0"
+  },
+  "vercel": {
+    "buildCommand": "npm run build",
+    "outputDirectory": "dist",
+    "installCommand": "npm ci"
   }
 }
