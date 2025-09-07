@@ -1,8 +1,9 @@
 import { create } from "zustand";
 import { languages } from "../data/languages";
+import { letters } from "../data/letters";
 
 export const useCurrentWordStore = create((set) => ({
-    currentWord: "preact",
+    currentWord: letters[Math.floor(Math.random() * 200)],
     setCurrentWord: (newWord) => set({currentWord: newWord})
 }));
 

@@ -1,5 +1,6 @@
 import { useMemo, useEffect } from "react";
 import { useCurrentWordStore, useGuessedLetters, useHasWon, useNoOfGuesses } from "../store/useCurrentWordStore";
+import { useToastStore } from "../store/useToastStore";
 import { buttonColorResolver } from "../helper/helperFunctions";
 
 export const Keyboard = () => {
@@ -8,6 +9,7 @@ export const Keyboard = () => {
   const { guessedLetters, addGuessedLetters } = useGuessedLetters();
   const { noOfGuesses, decrementGuesses } = useNoOfGuesses();
   const { hasWon, playerWon, reset } = useHasWon();
+  const { showWordToast } = useToastStore();
 
   const handleUserKeyPress = (letter) => {
     addGuessedLetters(letter);
@@ -31,6 +33,13 @@ export const Keyboard = () => {
     }
   }, [didWin, hasWon, playerWon]);
 
+  // Show toast when player loses
+  useEffect(() => {
+    if (noOfGuesses === 0 && !hasWon) {
+      showWordToast(currentWord);
+    }
+  }, [noOfGuesses, hasWon, currentWord, showWordToast]);
+
 
 
   const keyboardElements = alphabet.split("").map((letter, index) => {
@@ -42,7 +51,7 @@ export const Keyboard = () => {
     return (
       <button
         key={index}
-        disabled={noOfGuesses === 0 || hasWon || isCorrect}
+        disabled={guessedLetters.includes(letter) || noOfGuesses === 0 || hasWon}
         className={`w-[40px] h-[40px] 
           ${noOfGuesses === 0 || hasWon ? "opacity-50 cursor-not-allowed" : ""} 
           ${buttonColorResolver(isCorrect, isWrong)} 
