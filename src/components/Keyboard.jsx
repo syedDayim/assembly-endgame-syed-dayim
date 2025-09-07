@@ -1,22 +1,17 @@
 import { useState } from 'react';
 
-import { useCurrentWordStore } from '../store/useCurrentWordStore';
+import { useCurrentWordStore, useGuessedLetters } from '../store/useCurrentWordStore';
 
 import { buttonColorResolver } from '../helper/helperFunctions';
 
 export const Keyboard = () => {
     const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     const { currentWord } = useCurrentWordStore();
-    const [guessedLetters, setGuessedLetters] = useState([]);
-    
+    const { guessedLetters, addGuessedLetters } = useGuessedLetters();
+
     const handleUserKeyPress = (letter) => {
-        setGuessedLetters(prevLetters => 
-            prevLetters.includes(letter) ? 
-                prevLetters : [...prevLetters, letter]
-        )
+        addGuessedLetters(letter)
     }
-
-
     
     const keyboardElements = alphabet.split("").map((letter, index) => {
         const isCorrect = guessedLetters.includes(letter) && currentWord.toUpperCase().includes(letter);
