@@ -5,12 +5,16 @@ import { WinStatus } from './components/WinStatus'
 import { WordInput } from './components/WordInput'
 import { Keyboard } from './components/Keyboard'
 import { NewGame } from './components/NewGame'
-function App() {
+import ReactConfetti from 'react-confetti'
+import { useHasWon } from './store/useCurrentWordStore'
 
+function App() {
+  const { hasWon } = useHasWon();
 
   return (
     <>
       <div className='flex flex-col h-screen items-center justify-center gap-4'>
+       { hasWon && <ReactConfetti></ReactConfetti>}
         <Header />
         <WinStatus />
         <Tiles />
