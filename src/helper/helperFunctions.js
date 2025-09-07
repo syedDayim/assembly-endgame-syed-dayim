@@ -8,7 +8,12 @@ const buttonColorResolver = (isCorrect, isWrong) => {
     }
 } 
 
+const showNewGameButtonResolver = (noOfGuesses, guessedLetters) => {
+    return noOfGuesses === 0 && guessedLetters.length === 0; 
+}
+
 
 export { 
     buttonColorResolver,
+    showNewGameButtonResolver
 }
