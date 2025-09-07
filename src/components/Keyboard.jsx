@@ -1,5 +1,6 @@
 import { useMemo, useEffect } from "react";
 import { useCurrentWordStore, useGuessedLetters, useHasWon, useNoOfGuesses } from "../store/useCurrentWordStore";
+import { useToastStore } from "../store/useToastStore";
 import { buttonColorResolver } from "../helper/helperFunctions";
 
 export const Keyboard = () => {
@@ -8,6 +9,7 @@ export const Keyboard = () => {
   const { guessedLetters, addGuessedLetters } = useGuessedLetters();
   const { noOfGuesses, decrementGuesses } = useNoOfGuesses();
   const { hasWon, playerWon, reset } = useHasWon();
+  const { showWordToast } = useToastStore();
 
   const handleUserKeyPress = (letter) => {
     addGuessedLetters(letter);
@@ -30,6 +32,13 @@ export const Keyboard = () => {
       playerWon();
     }
   }, [didWin, hasWon, playerWon]);
+
+  // Show toast when player loses
+  useEffect(() => {
+    if (noOfGuesses === 0 && !hasWon) {
+      showWordToast(currentWord);
+    }
+  }, [noOfGuesses, hasWon, currentWord, showWordToast]);
 
 
 
