@@ -1,9 +1,9 @@
-import { useNoOfGuesses, useGuessedLetters } from "../store/useCurrentWordStore";
+import { useNoOfGuesses, useGuessedLetters, useHasWon } from "../store/useCurrentWordStore";
 
 export const NewGame = () => {
     const { resetGuessedLetters } = useGuessedLetters();
     const { noOfGuesses, resetGame } = useNoOfGuesses();
-    const hasWon = localStorage.getItem("hasWon")
+    const { hasWon } = useHasWon();
     return (
         <div className={`${noOfGuesses === 0 || hasWon ? "" : "hidden"}`}>
             <button

@@ -42,7 +42,7 @@ export const Keyboard = () => {
     return (
       <button
         key={index}
-        disabled={noOfGuesses === 0 || hasWon || isCorrect}
+        disabled={guessedLetters.includes(letter) || noOfGuesses === 0 || hasWon}
         className={`w-[40px] h-[40px] 
           ${noOfGuesses === 0 || hasWon ? "opacity-50 cursor-not-allowed" : ""} 
           ${buttonColorResolver(isCorrect, isWrong)} 
