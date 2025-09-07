@@ -18,7 +18,7 @@ function App() {
 
   return (
     <>
-      <div className='flex flex-col h-full items-center justify-center gap-4 py-5'>
+      <div className='flex flex-col h-full items-center justify-center gap-4 py-5 pb-16 sm:pb-5'>
        { hasWon && <ReactConfetti></ReactConfetti>}
         <Header />
         <ScoreDisplay />

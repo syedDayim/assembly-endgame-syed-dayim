@@ -5,23 +5,24 @@ export const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <div className="fixed bottom-4 right-4 z-40">
+    <div className="fixed bottom-2 right-2 sm:bottom-4 sm:right-4 z-30">
       <div className="relative">
         {/* Main copyright badge */}
         <div 
-          className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-full shadow-lg cursor-pointer hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+          className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-2 py-1 sm:px-4 sm:py-2 rounded-full shadow-lg cursor-pointer hover:shadow-xl transition-all duration-300 transform hover:scale-105"
           onClick={() => setShowDetails(!showDetails)}
         >
-          <div className="flex items-center gap-2">
-            <span className="text-sm font-medium">© {currentYear}</span>
-            <span className="text-xs opacity-80">Syed Dayim</span>
-            <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
+          <div className="flex items-center gap-1 sm:gap-2">
+            <span className="text-xs sm:text-sm font-medium">© {currentYear}</span>
+            <span className="text-xs opacity-80 hidden sm:inline">Syed Dayim</span>
+            <span className="text-xs opacity-80 sm:hidden">Dayim</span>
+            <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-white rounded-full animate-pulse"></div>
           </div>
         </div>
 
          {/* Expandable details */}
          {showDetails && (
-           <div className="absolute bottom-full right-0 mb-2 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 p-4 min-w-[280px] animate-in slide-in-from-bottom-2 duration-200">
+           <div className="absolute bottom-full right-0 mb-2 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 p-3 sm:p-4 min-w-[250px] sm:min-w-[280px] max-w-[90vw] animate-in slide-in-from-bottom-2 duration-200">
              <div className="text-sm text-gray-700 dark:text-gray-300">
                <div className="font-semibold text-gray-900 dark:text-white mb-3">
                  🎮 Assembly Endgame
