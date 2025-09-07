@@ -4,7 +4,8 @@ import { letters } from "../data/letters";
 
 export const useCurrentWordStore = create((set) => ({
     currentWord: letters[Math.floor(Math.random() * 200)],
-    setCurrentWord: (newWord) => set({currentWord: newWord})
+    setCurrentWord: (newWord) => set({currentWord: newWord}),
+    getNewRandomWord: () => set({currentWord: letters[Math.floor(Math.random() * 200)]})
 }));
 
 export const useGuessedLetters = create((set) => ({

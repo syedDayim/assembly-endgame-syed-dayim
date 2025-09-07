@@ -5,7 +5,7 @@ export const NewGame = () => {
     const { resetGuessedLetters } = useGuessedLetters();
     const { noOfGuesses, resetGame } = useNoOfGuesses();
     const { hasWon, reset } = useHasWon();
-    const { currentWord } = useCurrentWordStore();
+    const { currentWord, getNewRandomWord } = useCurrentWordStore();
     const { addScore, calculatePoints, nextLevel, resetScore } = useScoreStore();
     
     const handleNextLevel = () => {
@@ -21,8 +21,8 @@ export const NewGame = () => {
         resetGuessedLetters();
         reset();
         
-        // Reload to get new word
-        window.location.reload();
+        // Get new random word
+        getNewRandomWord();
     };
     
     const handleEndGame = () => {
@@ -36,8 +36,8 @@ export const NewGame = () => {
         resetGuessedLetters();
         reset();
         
-        // Reload to start fresh
-        window.location.reload();
+        // Get new random word
+        getNewRandomWord();
     };
     
     const handleStartOver = () => {
@@ -47,8 +47,8 @@ export const NewGame = () => {
         resetGuessedLetters();
         reset();
         
-        // Reload to start fresh
-        window.location.reload();
+        // Get new random word
+        getNewRandomWord();
     };
     
     return (
